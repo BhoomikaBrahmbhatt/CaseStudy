@@ -17,8 +17,9 @@ import kotlinx.coroutines.launch
 class MainFragment : Fragment(R.layout.fragment_main) {
 
     private val viewModel: BaseViewModel by viewModels()
-private val caseAdapter= CaseAdapter()
+    private val caseAdapter = CaseAdapter()
     private lateinit var binding: FragmentMainBinding
+
     @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -28,16 +29,16 @@ private val caseAdapter= CaseAdapter()
         binding.recyclerview.adapter = caseAdapter
 
         viewModel.caseStudyResponse.observe(viewLifecycleOwner) {
-            binding.progressbar.visible( it is Resource.Loading)
+            binding.progressbar.visible(it is Resource.Loading)
             when (it) {
                 is Resource.Success -> {
                     lifecycleScope.launch {
-caseAdapter.setCaseStudyList(it.value.caseStudies)
+                        caseAdapter.setCaseStudyList(it.value.caseStudies)
                         caseAdapter.notifyDataSetChanged()
                     }
                 }
                 is Resource.Failure -> handleApiError(it) {
-                    requireView().snackBar("Something went wrong ")
+                    requireView().snackBar(getString(R.string.wrong_error))
                 }
             }
         }

@@ -28,7 +28,7 @@ class CaseAdapter : RecyclerView.Adapter<MainViewHolder>() {
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
         val caseStudy = caseStudyList[position]
-        holder.binding.textTeaser.text =caseStudy.teaser
+        holder.binding.textTeaser.text = caseStudy.teaser
         val heroImageUrl = caseStudy.heroImage
         Glide.with(holder.itemView.context).load(heroImageUrl).into(
             holder.binding.imageHero

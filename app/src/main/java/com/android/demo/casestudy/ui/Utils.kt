@@ -2,6 +2,7 @@ package com.android.demo.casestudy.ui
 
 import android.view.View
 import androidx.fragment.app.Fragment
+import com.android.demo.casestudy.R
 import com.android.demo.casestudy.network.Resource
 import com.google.android.material.snackbar.Snackbar
 
@@ -26,12 +27,12 @@ fun Fragment.handleApiError(
 ) {
     when {
         failure.isNetworkError -> requireView().snackBar(
-            "Please check your internet connection",
+            getString(R.string.network_error),
             retry
         )
         failure.errorCode == 401 -> {
             if (this is MainFragment) {
-                requireView().snackBar("Something went wrong.")
+                requireView().snackBar(getString(R.string.wrong_error))
             }
         }
         else -> {

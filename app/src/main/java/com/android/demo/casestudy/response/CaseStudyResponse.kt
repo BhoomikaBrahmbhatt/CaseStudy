@@ -14,19 +14,7 @@ data class CaseStudies (
     @SerializedName("id"            ) var id           : Int?                = null,
     @SerializedName("client"        ) var client       : String?             = null,
     @SerializedName("teaser"        ) var teaser       : String?             = null,
-    @SerializedName("vertical"      ) var vertical     : String?             = null,
-    @SerializedName("is_enterprise" ) var isEnterprise : Boolean?            = null,
     @SerializedName("title"         ) var title        : String?             = null,
     @SerializedName("hero_image"    ) var heroImage    : String?             = null,
-   // @SerializedName("sections"      ) var sections     : ArrayList<Sections> = arrayListOf()
 
 )
-
-
-data class Sections (
-
-    @SerializedName("title"         ) var title        : String?           = null,
-    @SerializedName("body_elements" ) var bodyElements : ArrayList<String> = arrayListOf()
-
-)
-

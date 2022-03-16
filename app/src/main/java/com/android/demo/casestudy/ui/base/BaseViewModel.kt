@@ -15,13 +15,13 @@ import javax.inject.Inject
 @HiltViewModel
 class BaseViewModel @Inject constructor(private val repository: BaseRepository) : ViewModel() {
 
-    private val _caseStudyResponse : MutableLiveData<Resource<CaseStudyResponse>> = MutableLiveData()
-    val caseStudyResponse : LiveData<Resource<CaseStudyResponse>>
+    private val _caseStudyResponse: MutableLiveData<Resource<CaseStudyResponse>> = MutableLiveData()
+    val caseStudyResponse: LiveData<Resource<CaseStudyResponse>>
         get() =
-           _caseStudyResponse
+            _caseStudyResponse
 
 
-    fun loadCaseStudy()= viewModelScope.launch {
+    fun loadCaseStudy() = viewModelScope.launch {
         _caseStudyResponse.value = Resource.Loading
         _caseStudyResponse.value = repository.loadCaseStudy()
     }
