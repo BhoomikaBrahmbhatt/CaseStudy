@@ -9,7 +9,7 @@ fun View.visible(isVisible: Boolean) {
     visibility = if (isVisible) View.VISIBLE else View.GONE
 }
 
-fun View.snackbar(message: String, action: (() -> Unit)? = null) {
+fun View.snackBar(message: String, action: (() -> Unit)? = null) {
     val snackbar = Snackbar.make(this, message, Snackbar.LENGTH_LONG)
     action?.let {
         snackbar.setAction("Retry") {
@@ -25,18 +25,18 @@ fun Fragment.handleApiError(
     retry: (() -> Unit)? = null
 ) {
     when {
-        failure.isNetworkError -> requireView().snackbar(
+        failure.isNetworkError -> requireView().snackBar(
             "Please check your internet connection",
             retry
         )
         failure.errorCode == 401 -> {
             if (this is MainFragment) {
-                requireView().snackbar("Something went wrong.")
+                requireView().snackBar("Something went wrong.")
             }
         }
         else -> {
             val error = failure.errorBody?.string().toString()
-            requireView().snackbar(error)
+            requireView().snackBar(error)
         }
     }
 }

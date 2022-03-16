@@ -1,6 +1,5 @@
 package com.android.demo.casestudy.network
 
-import android.content.Context
 import com.android.demo.casestudy.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

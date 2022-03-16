@@ -1,5 +1,6 @@
 package com.android.demo.casestudy.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -16,28 +17,27 @@ import kotlinx.coroutines.launch
 class MainFragment : Fragment(R.layout.fragment_main) {
 
     private val viewModel: BaseViewModel by viewModels()
-
+private val caseAdapter= CaseAdapter()
     private lateinit var binding: FragmentMainBinding
+    @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentMainBinding.bind(view)
 
         binding.progressbar.visible(false)
+        binding.recyclerview.adapter = caseAdapter
 
-        viewModel.caseStudyResponse?.observe(viewLifecycleOwner) {
+        viewModel.caseStudyResponse.observe(viewLifecycleOwner) {
             binding.progressbar.visible( it is Resource.Loading)
             when (it) {
                 is Resource.Success -> {
                     lifecycleScope.launch {
-                        requireView().snackbar("Success")
-
-                      //  requireActivity().startNewActivity(HomeActivity::class.java)
+caseAdapter.setCaseStudyList(it.value.caseStudies)
+                        caseAdapter.notifyDataSetChanged()
                     }
                 }
                 is Resource.Failure -> handleApiError(it) {
-                   // login()
-                    requireView().snackbar("Fail")
-
+                    requireView().snackBar("Something went wrong ")
                 }
             }
         }
