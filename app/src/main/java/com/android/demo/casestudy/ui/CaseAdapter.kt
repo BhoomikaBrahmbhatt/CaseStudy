@@ -1,12 +1,9 @@
 package com.android.demo.casestudy.ui
 
-import android.annotation.SuppressLint
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.android.demo.casestudy.R
 import com.android.demo.casestudy.databinding.AdapterMainBinding
 import com.android.demo.casestudy.response.CaseStudies
 import com.bumptech.glide.Glide
@@ -29,6 +26,7 @@ class CaseAdapter : RecyclerView.Adapter<MainViewHolder>() {
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
         val caseStudy = caseStudyList[position]
         holder.binding.textTeaser.text = caseStudy.teaser
+        holder.binding.textTitle.text = caseStudy.title
         val heroImageUrl = caseStudy.heroImage
         Glide.with(holder.itemView.context).load(heroImageUrl).into(
             holder.binding.imageHero
