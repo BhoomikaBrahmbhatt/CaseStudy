@@ -138,8 +138,7 @@ class BaseViewModelTest  {
     fun `test_viewmodel_data`(){
         var caseStudiesList : List<CaseStudies> = FakeCaseStudy.caseStudy.toList()
 
-         val _caseStudyResponse =
-             CaseStudyResponse(caseStudiesList as ArrayList<CaseStudies>)
+         val _caseStudyResponse = CaseStudyResponse(caseStudiesList as ArrayList<CaseStudies>)
 
         viewModel.setCaseResponse(_caseStudyResponse)
         val result = viewModel.caseStudyResponse.getOrAwaitValue().run {
