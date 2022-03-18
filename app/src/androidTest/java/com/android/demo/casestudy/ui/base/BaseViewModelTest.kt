@@ -2,7 +2,6 @@ package com.android.demo.casestudy.ui.base
 
 import android.view.View
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.IdlingRegistry
@@ -22,9 +21,10 @@ import com.android.demo.casestudy.response.CaseStudies
 import com.android.demo.casestudy.response.CaseStudyResponse
 import com.android.demo.casestudy.ui.MainViewHolder
 import com.android.demo.casestudy.utils.getOrAwaitValue
-import com.bumptech.glide.load.engine.Resource
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
+import org.junit.Assert.assertNotNull
+import org.junit.Assert.assertEquals
 import org.hamcrest.Description
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers
@@ -33,7 +33,6 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.mockito.Mockito
 import javax.inject.Inject
 
 @SmallTest
@@ -135,14 +134,16 @@ class BaseViewModelTest  {
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
     @Test
-    fun `test_viewmodel_data`(){
-        var caseStudiesList : List<CaseStudies> = FakeCaseStudy.caseStudy.toList()
+    fun `test_viewmodel_data_insertion`(){
+        val caseStudiesList : List<CaseStudies> = FakeCaseStudy.caseStudy.toList()
 
-         val _caseStudyResponse = CaseStudyResponse(caseStudiesList as ArrayList<CaseStudies>)
+        val _caseStudyResponse = CaseStudyResponse(caseStudiesList as ArrayList<CaseStudies>)
 
         viewModel.setCaseResponse(_caseStudyResponse)
+
         val result = viewModel.caseStudyResponse.getOrAwaitValue().run {
-           assert(true)
+            assertNotNull(viewModel.caseStudyResponse.value) /* check asertion is null or not */
+            assertEquals(viewModel.caseStudyResponse.value,  viewModel.getCaseResponse(_caseStudyResponse)) /* check list must be same type */
         }
     }
 

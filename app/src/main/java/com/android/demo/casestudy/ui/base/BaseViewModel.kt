@@ -25,7 +25,7 @@ class BaseViewModel @Inject constructor(private val repository: BaseRepository) 
         _caseStudyResponse.value = repository.loadCaseStudy()
     }
 
-    private fun getCaseResponse(response: CaseStudyResponse): Resource<CaseStudyResponse> {
+    fun getCaseResponse(response: CaseStudyResponse): Resource<CaseStudyResponse> {
         return Resource.Success(response)
     }
 
