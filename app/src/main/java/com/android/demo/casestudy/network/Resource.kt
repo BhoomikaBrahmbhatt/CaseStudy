@@ -2,8 +2,8 @@ package com.android.demo.casestudy.network
 
 import okhttp3.ResponseBody
 
-sealed class Resource<out T> {
-    data class Success<out T>(val value: T) : Resource<T>()
+sealed class Resource<out CaseStudyResponse> {
+    data class Success<out CaseStudyResponse>(val value: CaseStudyResponse) : Resource<CaseStudyResponse>()
     data class Failure(
         val isNetworkError: Boolean,
         val errorCode: Int?,

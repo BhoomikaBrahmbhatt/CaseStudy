@@ -2,6 +2,7 @@ package com.android.demo.casestudy.ui.base
 
 import android.view.View
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.IdlingRegistry
@@ -15,8 +16,13 @@ import androidx.test.filters.SmallTest
 import com.android.demo.casestudy.MainActivity
 import com.android.demo.casestudy.R
 import com.android.demo.casestudy.data.EspressoIdlingResource
+import com.android.demo.casestudy.data.FakeCaseStudy
 import com.android.demo.casestudy.repository.BaseRepository
+import com.android.demo.casestudy.response.CaseStudies
+import com.android.demo.casestudy.response.CaseStudyResponse
 import com.android.demo.casestudy.ui.MainViewHolder
+import com.android.demo.casestudy.utils.getOrAwaitValue
+import com.bumptech.glide.load.engine.Resource
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import org.hamcrest.Description
@@ -27,6 +33,7 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.mockito.Mockito
 import javax.inject.Inject
 
 @SmallTest
@@ -127,12 +134,19 @@ class BaseViewModelTest  {
 
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
-    /*@Test
+    @Test
     fun `test_viewmodel_data`(){
+        var caseStudiesList : List<CaseStudies> = FakeCaseStudy.caseStudy.toList()
+
+         val _caseStudyResponse =
+             CaseStudyResponse(caseStudiesList as ArrayList<CaseStudies>)
+
+        viewModel.setCaseResponse(_caseStudyResponse)
         val result = viewModel.caseStudyResponse.getOrAwaitValue().run {
            assert(true)
         }
-    }*/
+    }
+
 
     private fun withViewAtPosition(position: Int, itemMatcher: Matcher<View?>): Matcher<View?> {
         return object : BoundedMatcher<View?, RecyclerView>(RecyclerView::class.java) {
