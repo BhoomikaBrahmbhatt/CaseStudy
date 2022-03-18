@@ -6,6 +6,7 @@ import com.android.demo.casestudy.R
 import com.android.demo.casestudy.network.Resource
 import com.google.android.material.snackbar.Snackbar
 
+
 fun View.visible(isVisible: Boolean) {
     visibility = if (isVisible) View.VISIBLE else View.GONE
 }

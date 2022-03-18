@@ -28,6 +28,7 @@ class CaseAdapter : RecyclerView.Adapter<MainViewHolder>() {
         holder.binding.textTeaser.text = caseStudy.teaser
         holder.binding.textTitle.text = caseStudy.title
         val heroImageUrl = caseStudy.heroImage
+
         Glide.with(holder.itemView.context).load(heroImageUrl).into(
             holder.binding.imageHero
         )

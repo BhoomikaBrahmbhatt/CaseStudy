@@ -16,6 +16,7 @@ android {
         versionCode 1
         versionName "1.0"
 
+        //testInstrumentationRunner "com.android.demo.casestudy.utils.MyTestRunner"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -53,6 +54,10 @@ dependencies {
 
     implementation 'com.google.dagger:hilt-android:2.38.1'
     kapt 'com.google.dagger:hilt-compiler:2.38.1'
+    kaptTest 'com.google.dagger:hilt-android-compiler:2.38.1'
+    androidTestImplementation 'com.google.dagger:hilt-android-testing:2.38.1'
+    kaptAndroidTest 'com.google.dagger:hilt-android-compiler:2.38.1'
+
 
     implementation "androidx.navigation:navigation-fragment-ktx:2.4.1"
     implementation "androidx.navigation:navigation-ui-ktx:2.4.1"
@@ -62,5 +67,20 @@ dependencies {
 
     implementation 'com.github.bumptech.glide:glide:4.12.0'
     kapt 'com.github.bumptech.glide:compiler:4.12.0'
+
+    // Espresso
+    androidTestImplementation "androidx.test.espresso:espresso-core:3.4.0"
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:3.4.0"
+    implementation "androidx.test.espresso:espresso-idling-resource:3.4.0"
+
+    // Mockk.io
+    def mockk_version = "1.9.3"
+    androidTestImplementation "io.mockk:mockk-android:$mockk_version"
+
+    androidTestImplementation 'androidx.arch.core:core-testing:2.1.0'
+// Room components
+    implementation "androidx.room:room-ktx:2.4.2"
+    kapt "androidx.room:room-compiler:2.4.2"
+
 
 }

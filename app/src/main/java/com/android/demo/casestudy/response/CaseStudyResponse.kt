@@ -18,7 +18,7 @@ data class CaseStudies (
     @SerializedName("is_enterprise" ) var isEnterprise : Boolean?            = null,
     @SerializedName("title"         ) var title        : String?             = null,
     @SerializedName("hero_image"    ) var heroImage    : String?             = null,
-   @SerializedName("sections"      ) var sections     : ArrayList<Sections> = arrayListOf()
+   //@SerializedName("sections"      ) var sections     : ArrayList<Sections> = arrayListOf()
 
 )
 

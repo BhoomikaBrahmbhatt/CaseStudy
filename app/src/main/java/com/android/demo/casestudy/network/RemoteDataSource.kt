@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Inject
 
 
-class RemoteDataSource @Inject constructor() {
+open class RemoteDataSource @Inject constructor() {
 
     companion object {
         private const val BASE_URL =

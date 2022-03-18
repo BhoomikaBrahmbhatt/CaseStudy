@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.android.demo.casestudy.data.FakeCaseStudy
 
 import com.android.demo.casestudy.network.Resource
 import com.android.demo.casestudy.repository.BaseRepository
