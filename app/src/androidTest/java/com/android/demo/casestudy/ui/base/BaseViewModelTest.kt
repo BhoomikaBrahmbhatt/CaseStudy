@@ -1,6 +1,7 @@
 package com.android.demo.casestudy.ui.base
 
 import android.view.View
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.IdlingRegistry
@@ -14,6 +15,7 @@ import androidx.test.filters.SmallTest
 import com.android.demo.casestudy.MainActivity
 import com.android.demo.casestudy.R
 import com.android.demo.casestudy.data.EspressoIdlingResource
+import com.android.demo.casestudy.repository.BaseRepository
 import com.android.demo.casestudy.ui.MainViewHolder
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
@@ -25,6 +27,7 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import javax.inject.Inject
 
 @SmallTest
 @HiltAndroidTest
@@ -36,13 +39,19 @@ class BaseViewModelTest  {
     @get:Rule(order = 1)
     val activityRule = ActivityScenarioRule(MainActivity::class.java)
 
-    private val test_item = 2
 
+    @Inject
+    lateinit var baseRepository: BaseRepository
+
+    lateinit var viewModel :BaseViewModel
+
+    private val test_item = 2
 
     @Before
     fun init(){
         hiltRule.inject()
         IdlingRegistry.getInstance().register(EspressoIdlingResource.countingIdlingResource)
+        viewModel = BaseViewModel(baseRepository)
 
     }
     @After
@@ -115,6 +124,15 @@ class BaseViewModelTest  {
             )
 
     }
+
+    @get:Rule
+    val instantTaskExecutorRule = InstantTaskExecutorRule()
+    /*@Test
+    fun `test_viewmodel_data`(){
+        val result = viewModel.caseStudyResponse.getOrAwaitValue().run {
+           assert(true)
+        }
+    }*/
 
     private fun withViewAtPosition(position: Int, itemMatcher: Matcher<View?>): Matcher<View?> {
         return object : BoundedMatcher<View?, RecyclerView>(RecyclerView::class.java) {

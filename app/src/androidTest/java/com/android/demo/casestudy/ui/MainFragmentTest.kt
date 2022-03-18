@@ -37,6 +37,7 @@ class MainFragmentTest{
     val activityRule = ActivityScenarioRule(MainActivity::class.java)
 
     private val test_item = 2
+
     val case_list : CaseStudies = FakeCaseStudy.caseStudy[test_item]
 
 
