@@ -8,16 +8,10 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.android.demo.casestudy.R
 import com.android.demo.casestudy.data.EspressoIdlingResource
-import com.android.demo.casestudy.data.FakeCaseStudy.FAKE_NETWORK_DELAY
-import com.android.demo.casestudy.data.FakeCaseStudy.caseStudy
 import com.android.demo.casestudy.databinding.FragmentMainBinding
 import com.android.demo.casestudy.network.Resource
 import com.android.demo.casestudy.ui.base.BaseViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.Dispatchers.Main
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -57,23 +51,5 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
         }
         viewModel.loadCaseStudy()
-    }
-
-    //check with fake data
-    //Test with local entries
-    fun insertFakeData() {
-        val job = GlobalScope.launch(IO) {
-            EspressoIdlingResource.increment()
-            binding.progressbarCasestudy.visible(true)
-            delay(FAKE_NETWORK_DELAY)
-        }
-        job.invokeOnCompletion {
-            GlobalScope.launch(Main) {
-                binding.progressbarCasestudy.visible(false)
-                caseAdapter.setCaseStudyList(caseStudy.toList())
-                caseAdapter.notifyDataSetChanged()
-                EspressoIdlingResource.decrement()
-            }
-        }
     }
 }

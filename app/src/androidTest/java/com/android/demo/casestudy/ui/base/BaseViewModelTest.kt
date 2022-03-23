@@ -141,7 +141,7 @@ class BaseViewModelTest  {
 
         viewModel.setCaseResponse(_caseStudyResponse)
 
-        val result = viewModel.caseStudyResponse.getOrAwaitValue().run {
+        viewModel.caseStudyResponse.getOrAwaitValue().run {
             assertNotNull(viewModel.caseStudyResponse.value) /* check asertion is null or not */
             assertEquals(viewModel.caseStudyResponse.value,  viewModel.getCaseResponse(_caseStudyResponse)) /* check list must be same type */
         }
